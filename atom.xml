@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Guo Fengyue&#39;s blog</title>
+  
+  <subtitle> </subtitle>
+  <link href="https://0gfy0.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://0gfy0.github.io/"/>
+  <updated>2022-07-31T07:35:39.655Z</updated>
+  <id>https://0gfy0.github.io/</id>
+  
+  <author>
+    <name>Guo Fengyue</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>markdown写作语法</title>
+    <link href="https://0gfy0.github.io/2022/07/31/markdown/"/>
+    <id>https://0gfy0.github.io/2022/07/31/markdown/</id>
+    <published>2022-07-31T03:04:11.000Z</published>
+    <updated>2022-07-31T07:35:39.655Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;使用表情符号&quot;&gt;&lt;a href=&quot;#使用表情符号&quot; class=&quot;headerlink&quot; title=&quot;使用表情符号&quot;&gt;&lt;/a&gt;使用表情符号&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;语法：&lt;code&gt;&amp;amp;#x+CODE;&lt;/code&gt;&lt;/strong&gt;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="personal website" scheme="https://0gfy0.github.io/tags/personal-website/"/>
+    
+    <category term="markdown" scheme="https://0gfy0.github.io/tags/markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Github+Hexo搭建个人博客</title>
+    <link href="https://0gfy0.github.io/2022/07/30/git0/"/>
+    <id>https://0gfy0.github.io/2022/07/30/git0/</id>
+    <published>2022-07-30T14:40:58.000Z</published>
+    <updated>2022-07-31T07:37:22.290Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-环境准备&quot;&gt;&lt;a href=&quot;#1-环境准备&quot; class=&quot;headerlink&quot; title=&quot;1. 环境准备&quot;&gt;&lt;/a&gt;1. 环境准备&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+    <category term="github" scheme="https://0gfy0.github.io/tags/github/"/>
+    
+    <category term="personal website" scheme="https://0gfy0.github.io/tags/personal-website/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://0gfy0.github.io/2022/07/30/hello-world/"/>
+    <id>https://0gfy0.github.io/2022/07/30/hello-world/</id>
+    <published>2022-07-30T08:31:07.202Z</published>
+    <updated>1985-10-26T08:15:00.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
