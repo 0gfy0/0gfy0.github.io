@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Guo Fengyue&#39;s blog</title>
+  <title>Guo FY&#39;s blog</title>
   
   <subtitle> </subtitle>
   <link href="https://0gfy0.github.io/atom.xml" rel="self"/>
   
   <link href="https://0gfy0.github.io/"/>
-  <updated>2022-07-31T07:35:39.655Z</updated>
+  <updated>2023-01-14T04:07:29.992Z</updated>
   <id>https://0gfy0.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Http模块与Web服务器</title>
+    <link href="https://0gfy0.github.io/2023/01/14/httpAndWeb/"/>
+    <id>https://0gfy0.github.io/2023/01/14/httpAndWeb/</id>
+    <published>2023-01-14T03:36:25.000Z</published>
+    <updated>2023-01-14T04:07:29.992Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;✨1-服务器软件&quot;&gt;&lt;a href=&quot;#✨1-服务器软件&quot; class=&quot;headerlink&quot; title=&quot;✨1. 服务器软件&quot;&gt;&lt;/a&gt;✨1. 服务器软件&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;apache：&lt;/strong&gt;（&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="web development" scheme="https://0gfy0.github.io/categories/web-development/"/>
+    
+    
+    <category term="node.js" scheme="https://0gfy0.github.io/tags/node-js/"/>
+    
+    <category term="study account" scheme="https://0gfy0.github.io/tags/study-account/"/>
+    
+  </entry>
+  
+  <entry>
     <title>markdown写作语法</title>
     <link href="https://0gfy0.github.io/2022/07/31/markdown/"/>
     <id>https://0gfy0.github.io/2022/07/31/markdown/</id>
     <published>2022-07-31T03:04:11.000Z</published>
-    <updated>2022-07-31T07:35:39.655Z</updated>
+    <updated>2023-01-14T04:08:42.751Z</updated>
     
     
       
@@ -33,6 +60,8 @@
       
     
     
+    
+    <category term="grammar" scheme="https://0gfy0.github.io/categories/grammar/"/>
     
     
     <category term="personal website" scheme="https://0gfy0.github.io/tags/personal-website/"/>
@@ -46,7 +75,7 @@
     <link href="https://0gfy0.github.io/2022/07/30/git0/"/>
     <id>https://0gfy0.github.io/2022/07/30/git0/</id>
     <published>2022-07-30T14:40:58.000Z</published>
-    <updated>2022-07-31T07:37:22.290Z</updated>
+    <updated>2023-01-14T04:08:59.913Z</updated>
     
     
       
@@ -59,6 +88,8 @@
       
     
     
+    
+    <category term="web development" scheme="https://0gfy0.github.io/categories/web-development/"/>
     
     
     <category term="github" scheme="https://0gfy0.github.io/tags/github/"/>

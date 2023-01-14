@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="to be continued..." />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Http模块与Web服务器 |  Guo FY&#39;s blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/gIcon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="Guo FY's blog" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-httpAndWeb"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Http模块与Web服务器
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/01/14/httpAndWeb/" class="article-date">
+  <time datetime="2023-01-14T03:36:25.000Z" itemprop="datePublished">2023-01-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/web-development/">web development</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="✨1-服务器软件"><a href="#✨1-服务器软件" class="headerlink" title="✨1. 服务器软件"></a>✨1. 服务器软件</h1><p><strong>apache：</strong>（<a target="_blank" rel="noopener" href="http://www.apache.org/%EF%BC%89apache%E6%98%AF%E4%B8%96%E7%95%8C%E4%BD%BF%E7%94%A8%E6%8E%92%E5%90%8D%E7%AC%AC%E4%B8%80%E7%9A%84web%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BD%AF%E4%BB%B6%EF%BC%9B">http://www.apache.org/）apache是世界使用排名第一的web服务器软件；</a>  </p>
+<ul>
+<li><p>可以运行在几乎所有广泛使用的计算机平台上；</p>
+</li>
+<li><p>开源的，可以免费用于商业应用；</p>
+</li>
+<li><p>它的运行超级稳定，效率非常之高……  </p>
+<p><em>Problem：</em>它本身仅提供html静态页面的功能，不能支持jsp、java servlet、asp等功能，但通过同其他应用服务器一起工作或添加插件来支持。   </p>
+<p><font color="F00078">（稳定高效，通常需要与其他服务器软件或插件协同工作）</font></p>
+</li>
+</ul>
+<p><strong>tomcat：</strong> tomcat是Apache软件基金会Jakarta项目中的一个核心项目。</p>
+<ul>
+<li><p>开源的，可以免费用于商业应用；</p>
+</li>
+<li><p>支持servlet/jsp，它还能处理html页面；</p>
+</li>
+<li><p>运行时占用的系统资源小，扩展性好。   </p>
+<p><em>Problem：</em>运行不够稳定，支持的并发连接数不够高，处理html时的效率不如apache，不能处理EJB等。   </p>
+<p><font color="F00078">（小巧精悍，适用于小型网站，后台开发语言为java的开发者在开发时使用）</font></p>
+</li>
+</ul>
+<p><strong>jboss：</strong>jboss目前属于Redhat公司。</p>
+<ul>
+<li><p>开源的，使用LGPL，可以在商业应用中免费使用；</p>
+</li>
+<li><p>支持EJB；需要较小的资源就可以运行。</p>
+</li>
+<li><p>其核心服务不包括servlet/jsp的web容器，有集成了tomcat的版本，并对tomcat进行了优化。   </p>
+<p><font color="F00078">（支持EJB的优化版tomcat）</font></p>
+</li>
+</ul>
+<p><strong>resin：</strong>resin是Caucho公司的产品。</p>
+<ul>
+<li><p>resin最突出的是它的性能非常高效，连html页面的效率也直追apache；</p>
+</li>
+<li><p>支持servlet/jsp，EJB。</p>
+</li>
+<li><p>虽然resin是开源的，不过有两种lisence：GPL和商用lisence，可以在GPL下免费使用，但注意商用的是要交钱的。   </p>
+<p><font color="F00078">（高效全功能的轻型服务器软件）</font></p>
+</li>
+</ul>
+<p><strong>weblogic：</strong>weblogic是bea公司出品的一款应用服务器软件。</p>
+<ul>
+<li><p>全面支持多种功能标准，包括EJB，servlet/jsp，html等；</p>
+</li>
+<li><p>出色的集群技术，极高的可扩展性；服务稳定；</p>
+<p><em>Problem:</em> weblogic不是一款开源的软件，虽然存在免费试用等，但它主要的应用目标为大型商业应用，而这种应用需要高额的license费用。   </p>
+<p><font color="F00078">（技术上没得说，不过是商用服务器软件，适合大型商业应用）</font></p>
+</li>
+</ul>
+<p><strong>websphere：</strong>websphere是IBM旗下的一款应用服务器软件。</p>
+<ul>
+<li><p>与weblogic相似，同为商业软件，同具有稳定、高效，支持多种应用。   </p>
+<p><em>Problem:</em> 也是需要高额的费用，适于大型商业应用；有Community Edition版本，是开源的。<font color="F00078">（如果有IBM其他配套产品，大型商用考虑使用）</font></p>
+</li>
+</ul>
+<p><strong>IIS：</strong>IIS（Internet Information Services）是microsoft公司的服务器软件。IIS与上面介绍的服务器软件完全不同，它是在windows server（2000/2003/2008……）平台上免费附加的，买了windows就可以免费使用IIS了，开源就别想了；与windows平台紧密结合在一起，支持html和asp，aspx等。既然是微软的产品，自然只能在windows平台上，……。</p>
+<p><font color="F00078">（如果是只用windows系统，想支持asp的就用它吧）</font>   </p>
+<hr>
+<p> 🌸介绍完了各个软件的特点，结合实际的应用，就可以选出真正适合自己的服务器软件。这里再给出几个常见应用的搭配：</p>
+<ol>
+<li>如果操作系统是windows系统，且想使用asp，.net等应用的，后台开发使用c#语言的，II；   </li>
+<li>如果仅需要展示html页面，而不要其他功能，apache；   </li>
+<li>如果是在开发时使用或者是一般小型应用，需要支持jsp/servlet，而又不需要EJB的，tomcat；</li>
+<li>需要支持jsp/servlet，不需要EJB，有希望提高服务器的效率和稳定性的，apache+tomcat；    </li>
+<li>需要支持jsp/servlet/EJB，而又想免费的，apache+jboss（包含tomcat的版本）；</li>
+<li>需要支持jsp/servlet/EJB，又可以花点小钱的，resin（实在认为有必要，可以考虑resin+apache）；</li>
+<li>大型商用，可以支付较高费用，weblogic（websphere可选）；</li>
+<li>大型商用，可以支付较高费用，且有其他IBM相关功能服务的，websphere。</li>
+</ol>
+<h1 id="✨2-Http模块"><a href="#✨2-Http模块" class="headerlink" title="✨2. Http模块"></a>✨2. Http模块</h1><p><em>Node.js中不需要使用IIS、Apache等这些第三方web服务器软件。因为我们可以基于Node.提供的http模块，通过几行简单的代码，就能轻松的手写一个服务器软件，从而对外提供web 服务。</em>   </p>
+<p><em>开发测试期间，本电脑的IP: 127.0.0.1；域名：localhost</em>    </p>
+<p>一台电脑中可以运行成百上千个web服务。每个web服务都对应一个唯一的端口号。客户端发送过来的网络请求，通过端口号，可以被准确地交给对应的web服务进行处理。<br></p>
+<p><font color="6c71c2"><em>NOTICE:</em></font></p>
+<p><font color="6c71c2"><em>1. 每个端口号不能同时被多个web 服务占用。</em></font></p>
+<p><font color="6c71c2"><em>2. 在实际应用中，URL中的80端口可以被省略</em></font></p>
+<h2 id="☕2-1-Web服务器"><a href="#☕2-1-Web服务器" class="headerlink" title="☕2.1 Web服务器"></a>☕2.1 Web服务器</h2><h3 id="2-1-1-创建Web服务器步骤"><a href="#2-1-1-创建Web服务器步骤" class="headerlink" title="2.1.1 创建Web服务器步骤"></a>2.1.1 创建Web服务器步骤</h3><p>①导入http模块</p>
+<p>②创建web 服务器实例</p>
+<p>③为服务器实例绑定request事件，监听客户端的请求</p>
+<p>④启动服务器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 1.导入http模块</span><br><span class="line">const http = require(&#x27;http&#x27;)</span><br><span class="line">// 2.创建web 服务器实例</span><br><span class="line">const server = http.createServer()</span><br><span class="line">// 3.为服务器实例绑定request事件，监听客户端的请求</span><br><span class="line">server.on( &#x27;request&#x27;, (req,res) =&gt; &#123;</span><br><span class="line">	// 只要有客户端来请求我们自己的服务器，就会触发request 事件，从而调用这个事件处理函数</span><br><span class="line">    console.log( &#x27;Someone visit our web server.&#x27; )</span><br><span class="line">    // req.method是客户端的 method请求类型</span><br><span class="line">    const str = `Your request url is $&#123;req.url&#125;，and request method is $&#123;req.method&#125;`</span><br><span class="line">    </span><br><span class="line">    // 当调用res.end()方法，向客户端发送中文内容时，会出现乱码问题,需设置响应头Content-Type 为 text/html; charset=utf-8</span><br><span class="line">	res.setHeader( &#x27;Content-Type&#x27;,  &#x27;text/html; charset=utf-8&#x27;)</span><br><span class="line">    // 调用 res.end()方法，向客户端响应一些内容</span><br><span class="line">    res.end(str)</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 4.启动服务器</span><br><span class="line">server.listen(8080, () =&gt;&#123;</span><br><span class="line">	console.log(&#x27;http server running at http://127.0.0.1:8080&#x27;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-2-根据url响应html步骤"><a href="#2-1-2-根据url响应html步骤" class="headerlink" title="2.1.2 根据url响应html步骤"></a>2.1.2 根据url响应html步骤</h3><p>①：获取请求的url地址</p>
+<p>②：设置默认的响应内容为404 Not found</p>
+<p>③：判断用户请求的是否为 / 或 /index.html 首页</p>
+<p>④：判断用户请求的是否为 /about.html 关于页面</p>
+<p>⑤：设置 Content-Type 响应头，防止中文乱码</p>
+<p>⑥：使用 res.end() 把内容响应给客户端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const http = require(&#x27;http&#x27;)</span><br><span class="line">const server = http.createServer()</span><br><span class="line"></span><br><span class="line">server.on( &#x27;request&#x27;, function(req,res) &#123;</span><br><span class="line">    const url = req.url			// 1．获取请求的url地址</span><br><span class="line">	let content = &#x27;&lt;h1&gt;404 Not found!&lt;/h1&gt;&#x27;// 2．设置默认的内容为404 Not found</span><br><span class="line">    if (url === &#x27;/&#x27; || url === &#x27;/index.html&#x27;) &#123;</span><br><span class="line">		content = &#x27;&lt;h1&gt;首页&lt;/h1&gt;&#x27;		// 3．用户请求的是首页</span><br><span class="line">	&#125;else if (url === &#x27;/about.html&#x27;)&#123;</span><br><span class="line">		content = &#x27;&lt;h1&gt;关于页面&lt;/h1&gt;&#x27;	// 4．用户请求的是关于页面</span><br><span class="line">	&#125;</span><br><span class="line">	// 5．设置Content-Type响应头,防止中文乱码</span><br><span class="line">	res.setHeader ( &#x27;Content-Type&#x27;,&#x27;text/html; charset=utf-8&#x27;)</span><br><span class="line">	res.end(content)		// 6．把内容发送给客户端</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(8080, () =&gt;&#123;</span><br><span class="line">	console.log(&#x27;http server running at http://127.0.0.1:8080&#x27;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="✨3-模块化"><a href="#✨3-模块化" class="headerlink" title="✨3. 模块化"></a>✨3. 模块化</h1><p>提高了代码的：复用性、可维护性、实现按需加载   </p>
+<p>☁️根据模块来源的不同， Node.js中将模块分为了3大类：</p>
+<ul>
+<li>内置模块（由Node.js 官方提供，如fs、path、http等）   </li>
+<li>自定义模块（用户创建的每个.js文件）   </li>
+<li>第三方模块（由第三方开发出来的模块，使用前需要先下载）    </li>
+</ul>
+<h2 id="☕3-1-加载模块"><a href="#☕3-1-加载模块" class="headerlink" title="☕3.1 加载模块"></a>☕3.1 加载模块</h2><p>方法：require()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 1．加载内置的fs模块</span><br><span class="line">const fs = require(&#x27;fs&#x27;)</span><br><span class="line"></span><br><span class="line">// 2．加载用户的自定义模块</span><br><span class="line">const custom = require(&#x27;./custom.js&#x27;)</span><br><span class="line"></span><br><span class="line">// 3．加载第三方模块</span><br><span class="line">const moment = require( &#x27;moment&#x27; )</span><br></pre></td></tr></table></figure>
+
+<p><font color="6c71c2"><em>NOTICE:</em></font></p>
+<p><font color="6c71c2"><em>1. 使用require()方法加载其它模块时，会执行被加载模块中的代码。</em></font></p>
+<p><font color="6c71c2"><em>2. 在使用require()加载用户自定义模块期间，可以省略.js后缀名</em></font></p>
+<p>*References:</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_55534317/article/details/126101820">Node.js教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lhxsoft/p/16414185.html">常见的网络服务器软件综合比较介绍</a></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://0gfy0.github.io/2023/01/14/httpAndWeb/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/" rel="tag">node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/study-account/" rel="tag">study account</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2022/07/31/markdown/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">markdown写作语法</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2023
+        <i class="ri-heart-fill heart_icon"></i> Guo Fengyue
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Guo FY&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
